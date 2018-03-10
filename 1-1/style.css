@@ -1,0 +1,67 @@
+body {
+    margin-top: 50px;
+}
+
+.container {
+    padding-top: 10px;
+    background-color: red;
+    width: 500px;
+    margin: 0 auto;
+}
+
+
+.textbox {
+    margin: 0 auto;
+    margin-left: 40px;
+    height: 30px;
+    width: 380px;
+    padding-left: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+}
+
+ul li button{
+    float: right;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    background-color: ghostwhite;
+    border: 0;
+    padding: 0;
+}
+
+
+ul {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+ul li {
+    list-style-type: none;
+    height: 30px;
+    background-color: ghostwhite;
+    list-style-position: inside;
+    padding-left: 40px;
+    line-height: 30px;
+
+}
+
+.btn {
+    height: 35px;
+    margin-left: -100px;
+    background-color: rgb(184, 184, 184);
+    width: 95px;
+    border: 0;
+    padding: 0;
+}
+ul li:hover {
+    background-color: #eee;
+}
+
+ul li button:hover {
+    background-color: red;
+}
