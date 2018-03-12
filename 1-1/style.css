@@ -47,7 +47,14 @@ ul li {
     list-style-position: inside;
     padding-left: 40px;
     line-height: 30px;
+    background-image: url("./tick.svg") no-repeat left;
+    
+}
 
+.main ul li.completed {
+    text-decoration: line-through;
+    background-color: #a5a5a5;
+    color: #fff;
 }
 
 .btn {
