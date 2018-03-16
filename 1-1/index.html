@@ -7,38 +7,21 @@
 </head>
 <body>
 <div class="container">
-    <h1>My To Do List</h1>
-    
     <div class="nav">
+        <h1>My To Do List</h1>
         <input type="text" class="textbox" id="text-data" placeholder="Title...">
-        <input type="button" class="btn" id="add" value="Add">
+        <button class="btn" id="add" type="button">Add</button>
     </div>
     
-    <div class="main">
+    <div class="content">
         <ul id="myList">
-            <li class="completed">
-                <span>Buy eggs</span>
-                
-                <button class = "lBtn">&#215;</button>
-            </li>
-            <li>
-                Read a book
-                <button class = "lBtn">&#215;</button>
-            </li>
-            <li>
-                Organize office
-                <button class = "lBtn">&#215;</button>
-            </li>
-            <li>
-                UET Code Camp 2018
-                <button class = "lBtn">&#215;</button>
-            </li>
+            <li class="completed">Buy eggs <span class="close">×</span></li>
+            <li>Read a book <span class="close">×</span></li>
+            <li>Organize office <span class="close">×</span></li>
+            <li>UET Code Camp 2018 <span class="close">×</span></li>
         </ul>
     </div>  
 </div>
-
-
-
 <script src="./func.js"></script>
 </body>
 </html>
