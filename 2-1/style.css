@@ -21,6 +21,10 @@ body {
     height: 150px;
 }
 
+h1 {
+  padding-bottom: 10px;
+}
+
 .header input {
     margin: 0 auto;
     height: 30px;

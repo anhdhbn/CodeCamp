@@ -2,6 +2,13 @@ var button = document.getElementById('btnAdd');
 var input = document.getElementById('inputAdd');
 var list = document.getElementById('mylist');
 
+input.addEventListener('keyup', function(event){
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        button.click();
+    }
+})
+
 function removeTodoFromStorage(id)
 {
     var todos = getTodosFromStorage();
@@ -70,7 +77,7 @@ function onClickTodo(event) {
 
 function renderTodoToHTML(text, completed, i) {
     var todo = document.createElement('li');
-    todo.innerHTML = text + '<span class="close">×</span>';
+    todo.innerHTML = text + '<span class="close">x</span>';
     todo.id = i;
 
     if (completed) {
