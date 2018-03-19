@@ -18,13 +18,17 @@ function removeTodoFromStorage(id)
 
 function addTodoToLocalStorage(text)
 {
-    var todos = getTodosFromStorage();
-    todos.push({
-        text: text,
-        completed: false
-    });
+    if(text)
+    {
+        var todos = getTodosFromStorage();
+        todos.push({
+            text: text,
+            completed: false
+        });
 
-    saveTodosToStorage(todos);
+        saveTodosToStorage(todos);
+    }
+    
 }
 
 function clearInput()
