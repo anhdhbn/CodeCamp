@@ -34,7 +34,6 @@ class Todo extends Component {
 
 class TodosList extends Component {
     createLi = () =>{
-        //console.log(this.props.todos);
         var {todos} = this.props;
         let listLi = [];
         for (let i = 0; i < todos.length; i++) { 
@@ -132,17 +131,20 @@ class Container extends Component {
     handleClick  = () => {
         
         let tempTodos = this.state.todos;
-        let tempItem = {
-            text: this.state.text,
-            completed: false
-        };
-        tempTodos.push(tempItem);      
-        var str = JSON.stringify(tempTodos);
-        localStorage.setItem('todos', str);
-         this.setState({
-            todos: this.getTodosFromStorage(),
-            text: ""
-         });
+        if(this.state.text){
+            let tempItem = {
+                text: this.state.text,
+                completed: false
+            };
+            tempTodos.push(tempItem);      
+            var str = JSON.stringify(tempTodos);
+            localStorage.setItem('todos', str);
+             this.setState({
+                todos: this.getTodosFromStorage(),
+                text: ""
+             });
+        }
+        
 
     }
     handleInput = (text) => {
