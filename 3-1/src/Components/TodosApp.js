@@ -52,8 +52,6 @@ class TodosList extends Component {
 }
 
 class Input extends Component {
-
-
     changeText = (event) => {
         this.props.handleInput(event.target.value);
     }
@@ -114,12 +112,8 @@ class Container extends Component {
     handleDelete = (index) => {
         let tempTodos = this.state.todos;
         tempTodos.splice(index, 1);
-        var str = JSON.stringify(tempTodos);
-        localStorage.setItem('todos', str);
-         this.setState({
-            todos: this.getTodosFromStorage(),
-            text: ""
-         });
+        this.saveTodosToStorage(tempTodos);
+        this.handleSetState();
     }
     handleSetState = () => {
         this.setState({
@@ -128,24 +122,13 @@ class Container extends Component {
          });
     }
 
-    handleClick  = () => {
-        
+    handleClick  = () => {       
         let tempTodos = this.state.todos;
         if(this.state.text){
-            let tempItem = {
-                text: this.state.text,
-                completed: false
-            };
-            tempTodos.push(tempItem);      
-            var str = JSON.stringify(tempTodos);
-            localStorage.setItem('todos', str);
-             this.setState({
-                todos: this.getTodosFromStorage(),
-                text: ""
-             });
+            this.addTodosToStorage(this.state.text) ;    
+            this.saveTodosToStorage(tempTodos);
+            this.handleSetState();
         }
-        
-
     }
     handleInput = (text) => {
         this.setState({text: text});
@@ -164,8 +147,17 @@ class Container extends Component {
         }
     }
     saveTodosToStorage = (todos) => {
-        var str = JSON.stringify(todos);
+        const str = JSON.stringify(todos);
         localStorage.setItem('todos', str);
+    }
+
+    addTodosToStorage = (text) => {
+        let tempTodos = this.state.todos;
+        let tempItem = {
+            text: text,
+            completed: false
+        };
+        tempTodos.push(tempItem);  
     }
 }
 
