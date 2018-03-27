@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import '../style.css';
+import {fetchTodos} from "./Services/APIServices";
+import {createTodo} from "./Services/APIServices";
+import {ChangeCompleted} from "./Services/APIServices";
+import {DeleteTodo} from "./Services/APIServices";
 
 class Todo extends Component {
 
@@ -9,13 +13,19 @@ class Todo extends Component {
         var tag = target.tagName;
 
         if (tag === 'LI') {
-            var tempTodos = this.props.todos;
+            //var tempTodos = this.props.todos;
             var id = target.id;
             var todo = this.props.todos[id];
-            todo.completed = !todo.completed;
-            var str = JSON.stringify(tempTodos);
-            localStorage.setItem('todos', str);
-            this.props.handleSetState();
+            // todo.completed = !todo.completed;
+            // var str = JSON.stringify(tempTodos);
+            // localStorage.setItem('todos', str);
+            ChangeCompleted(todo.text, todo.completed).then(object => {
+                const {success} = object;
+                if(success) {
+                    this.props.handleSetState();
+                }
+            });
+            //this.props.handleSetState();
         }
 
         if (tag === 'SPAN') {
@@ -91,14 +101,15 @@ class Header extends Component {
 
 class Container extends Component {
     
-    constructor(props) {
-        super(props);
-          
-        this.state = {
-           todos: this.getTodosFromStorage(),
-           text: ""
-        }
+     state = {
+         todos: [],
+         text: ""
      }
+
+     componentDidMount(){
+         this.handleSetState();
+     }
+
 
     render(){
         return(
@@ -111,23 +122,37 @@ class Container extends Component {
 
     handleDelete = (index) => {
         let tempTodos = this.state.todos;
-        tempTodos.splice(index, 1);
-        this.saveTodosToStorage(tempTodos);
-        this.handleSetState();
+        var todo = tempTodos[index];
+        DeleteTodo(todo.text, todo.completed).then(object => {
+            const {success} = object;
+            if(success) {
+                this.handleSetState();
+            }
+        });
     }
     handleSetState = () => {
-        this.setState({
-            todos: this.getTodosFromStorage(),
-            text: ""
-         });
+        fetchTodos().then(object => {
+            const {data, success} = object;
+            if(success) {
+                this.setState({            
+                    todos: data,
+                    text: ""
+                 });
+            }
+        })       
     }
 
     handleClick  = () => {       
-        let tempTodos = this.state.todos;
         if(this.state.text){
-            this.addTodosToStorage(this.state.text) ;    
-            this.saveTodosToStorage(tempTodos);
-            this.handleSetState();
+            createTodo(this.state.text).then(object => {
+                const {success} = object;
+                if(success) {
+                    this.handleSetState();
+                }
+            });
+            // this.addTodosToStorage(this.state.text) ;    
+            // this.saveTodosToStorage(tempTodos);
+            // this.handleSetState();
         }
     }
     handleInput = (text) => {
